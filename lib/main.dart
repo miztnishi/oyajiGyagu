@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'screens/chat_screen.dart';
 import 'screens/ranking_screen.dart';
-import 'package:flutter/material.dart';
+import 'screens/settings_screen.dart';
+import 'package:flutter/rendering.dart';
 
 void main() {
+  // debugPaintSizeEnabled = true; // デバッグ用の枠線を有効化
   runApp(const MyApp());
 }
 
@@ -35,6 +37,17 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
           appBar: AppBar(
             title: Text("みんなで親父ギャグ"),
+            actions: [
+              IconButton(
+                icon: Icon(Icons.settings),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SettingsScreen()),
+                  );
+                },
+              ),
+            ],
           ),
           body: _pageWidget.elementAt(_currentIndex),
           bottomNavigationBar: BottomNavigationBar(

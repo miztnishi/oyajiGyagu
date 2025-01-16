@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class MessageInput extends StatelessWidget {
+class MessageInput extends StatefulWidget {
   final TextEditingController controller;
   final Function(String) onSend;
 
@@ -11,6 +11,11 @@ class MessageInput extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  _MessageInputState createState() => _MessageInputState();
+}
+
+class _MessageInputState extends State<MessageInput> {
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -18,7 +23,7 @@ class MessageInput extends StatelessWidget {
         children: [
           Expanded(
             child: TextField(
-              controller: controller,
+              controller: widget.controller, // ウィジェットから取得
               decoration: const InputDecoration(
                 hintText: 'Type a message',
                 border: OutlineInputBorder(),
@@ -28,10 +33,18 @@ class MessageInput extends StatelessWidget {
           const SizedBox(width: 8),
           ElevatedButton(
             onPressed: () {
-              onSend(controller.text);
-              controller.clear();
+              if (widget.controller.text.trim().isNotEmpty) {
+                widget.onSend(widget.controller.text.trim()); // メッセージを送信
+                widget.controller.clear(); // テキストフィールドをクリア
+              }
             },
             child: const Text('Send'),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: widget.controller.text.trim().isNotEmpty
+                  ? Colors.blue
+                  : Colors.grey, // ボタンの色を動的に変更
+              foregroundColor: Colors.white, // ボタンの色を動的に変更
+            ),
           ),
         ],
       ),

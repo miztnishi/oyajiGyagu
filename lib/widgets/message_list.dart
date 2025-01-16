@@ -22,6 +22,7 @@ class MessageList extends StatelessWidget {
         return MessageBubble(
           text: message['text']!,
           isMe: isMe,
+          senderName: "12345678901234567890",
         );
       },
     );
