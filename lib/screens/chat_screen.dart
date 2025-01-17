@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../widgets/message_list.dart';
 import '../widgets/message_input.dart';
+import '../widgets/message_grid.dart';
 
 class ChatScreen extends StatefulWidget {
   @override
@@ -35,14 +36,10 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Chat UI')),
       body: Column(
         children: [
           Expanded(
-            child: MessageList(
-              messages: _messages,
-              scrollController: _scrollController,
-            ),
+            child: MessageGrid(),
           ),
           MessageInput(
             onSend: _sendMessage,
